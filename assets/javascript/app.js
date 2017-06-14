@@ -9,7 +9,7 @@
 $('body').css('background-image', 'url(assets/images/palico1.png)');
 
 //Holds all trivia questions
-var triviaQuestions = {
+var questionsMH = {
     question1: {
         question: 'What Lynian species of cats try to hit you and steal your items?',
         correct: 'Melynx',
@@ -120,6 +120,46 @@ var triviaQuestions = {
         correct: 'All of these',
         incorrect: ['Event Tickets', 'Ores', 'Monster Parts'],
     },
+    question23: {
+        question: 'What monster looks like a big snow bunny?',
+        correct: 'Lagombi',
+        incorrect: ['Nargacuga', 'Zamtrios', 'Khezu', 'Arzuros'],
+    },
+    question24: {
+        question: 'What monster looks like a big snow bunny?',
+        correct: 'Lagombi',
+        incorrect: ['Nargacuga', 'Zamtrios', 'Khezu', 'Arzuros'],
+    },
+    question25: {
+        question: 'What monster resorts to eating it\'s own tail when it is weakend?',
+        correct: 'Deviljho',
+        incorrect: ['Nargacuga', 'Seregios', 'Gigginox', 'Tigerx'],
+    },
+    question26: {
+        question: 'Which elder dragon spreads the Frenzy virus?',
+        correct: 'Shagaru Magala',
+        incorrect: ['Fatalis', 'Chameleos', 'Alatreon', 'Dalamadur'],
+    },
+    question27: {
+        question: 'Which monster species among these is the largest monster?',
+        correct: 'Jhen Mohran',
+        incorrect: ['Great Jaggi', 'Kirin', 'Alatreon', 'Lagiacrus'],
+    },
+    question28: {
+        question: 'Which monster can steal your items when they hit you?',
+        correct: 'Chameleos',
+        incorrect: ['Teostra', 'Kirin', 'Kushala Daora', 'Lunastra'],
+    },
+    question29: {
+        question: 'Which weapon is most commonly used during introduction tutorials?',
+        correct: 'Sword and Shield',
+        incorrect: ['Greatsword', 'Hammer', 'Longsword', 'Bow'],
+    },
+    question30: {
+        question: 'What consumable item does not usually recover stamina?',
+        correct: 'Max Potion',
+        incorrect: ['Dash Juice', 'Well-done Steak', 'Rare Steak', 'Rations'],
+    },
 }
 
 //Interval values
@@ -129,6 +169,7 @@ var resetTime = 20;
 var seconds = resetTime;
 
 //Question values
+var triviaQuestions = questionsMH;
 var triviaKeys = loadKeys(triviaQuestions);
 var score = 0;
 var numberIncorrect = 0;
