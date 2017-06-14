@@ -2,10 +2,10 @@
 <html>
     <head>
         <meta charset='utf-8'/>
-        <title>Trivia Game</title>
+        <title>Monster Hunter Trivia</title>
 
         <!-- Icon -->
-        <link rel='icon' type='image/gif' href='assets/images/palicoLogo.jpg'>
+        <link rel='icon' type='image/gif' href='assets/images/potion.png'>
 
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -32,8 +32,8 @@
         -->
 
         <div class='container' id='titleContainer'>
-            <div class='row text-center'>
-                <h1 id='triviaTitle'>Monster Hunter Trivia</h1>
+            <div class='jumbotron text-center' id='triviaTitle'>
+                <h2>Monster Hunter Trivia</h2>
             </div>
             <!-- Stuff goes here -->
             <div class='container' id='mainContainer'>
@@ -42,25 +42,33 @@
                 </div>
 
                 <!-- Timer -->
-                <div class='row' id='timer'>
+                <div class='row'>
+                    <div class = 'col-sm-5'></div>
+                    <div class = 'col-sm-2'>
+                        <div class='text-center panel panel-default' id='timer'>
+                        </div>
+                    </div>
+                    <div class = 'col-sm-5'></div>
                 </div>
 
                 <!-- Questions go here -->
-                <div class='row' id='questionHolder'>
+                <div class='row'>
+                    <div class='col-sm-1'></div>
+                    <div class='col-sm-10 panel panel-default' id='holderQA'>
+                        <div class='panel-body' id='questionHolder'>
+                        </div>
+                        <!-- Answers go here -->
+                        <div class='panel-body' id='answerHolder'>
+                        </div>
+                        <!-- Final score goes here -->
+                        <div class='panel-body text-center' id='scoreHolder'>
+                        </div>
+                    </div>
                 </div>
-                <!-- Answers go here -->
-                <div class='row' id='answerHolder'>
-                </div>
-
-                <br/>
-
                 <!-- Next Button -->
                 <div class='row' id='buttonHolder2'> 
+                    <div class='col-sm-1'></div>
                 </div>
-                <div class='row text-center' id='scoreHolder'>
-                </div>
-
-                <br/>
 
                 <!-- Reset Button -->
                 <div class='row text-center' id='buttonHolder3'> 

@@ -3,8 +3,10 @@
  * Purpose: HW Assignment
  *
  * Created: 6-13-2017
- * Last Update: 6-13-2017
+ * Last Update: 6-14-2017
  */
+
+$('body').css('background-image', 'url(assets/images/palico1.png)');
 
 //Holds all trivia questions
 var triviaQuestions = {
@@ -191,11 +193,10 @@ var showAnswer = false;
 var currentAnswer = 'N/A';
 var currentCorrect = 'N/A';
 var timer = $('#timer');
-timer.html("<h3 class='text-center'>" + intervalHolder.timeConverter(seconds) + "</h3>");
-timer.css('visibility', 'hidden');
 var questionHolder = $('#questionHolder');
 var answerHolder = $('#answerHolder');
 var scoreHolder = $('#scoreHolder');
+var holderQA = $('#holderQA');
 
 //Permanent buttons
 var startButton;
@@ -241,6 +242,7 @@ function startFunction() {
         triviaEnded = false;
         startButton.css('visibility', 'hidden');
         nextButton.css('visibility', 'visible');
+        holderQA.css('visibility', 'visible');
         scoreHolder.empty();
         handleTrivia();
     } else {
@@ -272,8 +274,10 @@ function resetFunction() {
         resetTime = 20;
         timer.html("<h3 class='text-center'>" + intervalHolder.reset() + "</h3>");
         timer.html("<h3 class='text-center'>" + intervalHolder.timeConverter(seconds) + "</h3>");
+        timer.css('visibility', 'hidden');
         startButton.css('visibility', 'visible');
         resetButton.css('visibility', 'hidden');
+        holderQA.css('visibility', 'hidden');
     } else {
         return;
     }
@@ -326,7 +330,7 @@ function continueTrivia() {
     resetTime = 20;
 
     var questionObject = triviaQuestions[triviaKeys[currentQuestion]];
-    questionHolder.html('<p>' + questionObject['question'] + '</p>');
+    questionHolder.html('<h3>' + questionObject['question'] + '</h3>');
     //console.log(questionObject['question']);
 
     var responses = questionObject['incorrect'].slice(0);
@@ -451,6 +455,7 @@ function endTrivia() {
     numberIncorrect--;
     scoreHolder.append('<h3>Number Incorrect: ' + numberIncorrect + '</h3>');
     timer.css('visibility', 'hidden');
+    holderQA.css('visibility', 'visible');
     resetButton.css('visibility', 'visible');
 }
 
