@@ -19,7 +19,7 @@ var triviaQuestions = {
         incorrect: ['Malfestio', 'Rathian', 'Astalos', 'Seltas'],
     },
     question3: {
-        question: 'What combination of items creates a Megapotion?',
+        question: 'What combination of items creates a Mega Potion?',
         correct: 'Potion + Honey',
         incorrect: ['Potion + Blue Mushroom', 'Herb + Tropical Berry', 'Herb + Mega Dash Juice', 'Potion + Nitroshroom'],
     },
@@ -121,6 +121,7 @@ var triviaQuestions = {
 }
 
 //Interval values
+
 var secondCounter;
 var resetTime = 20;
 var seconds = resetTime;
@@ -193,22 +194,14 @@ var answerHolder = $('#answerHolder');
 var startButton = $('#startButton');
 var nextButton = $('#nextButton');
 nextButton.css('visibility', 'hidden');
+var resetButton = $('#resetButton');
+resetButton.css('visibility', 'hidden');
 var scoreHolder = $('#scoreHolder');
 
-/* Test function //
-   $('#startButton').mouseup(resetTimer);
-
-   function resetTimer() {
-//intervalHolder.reset();
-timer.html("<h3 class='text-center'>" + intervalHolder.timeConverter(seconds) + "</h3>");
-//console.log(seconds);
-intervalHolder.stopSecondCounter();
-intervalHolder.startSecondCounter();
-}
-*/
-
+//Set non removed buttons
 startButton.mouseup(startFunction);
 nextButton.mouseup(nextFunction);
+resetButton.mouseup(resetFunction);
 
 function startFunction() {
     if (triviaEnded) {
@@ -216,16 +209,32 @@ function startFunction() {
     } else {
         startButton.css('visibility', 'hidden');
         nextButton.css('visibility', 'visible');
+        scoreHolder.empty();
         handleTrivia();
     }
     //continueTrivia();
 }
 
+//Resets timer and goes to next questions
 function nextFunction() {
     if (triviaEnded) {
         return;
     } else {
         handleTrivia();
+    }
+}
+
+//Resets so you can play again!
+function resetFunction() {
+    if(triviaEnded) {
+        scrambleArray(triviaKeys);
+        score = 0;
+        currentQuestion = 0;
+        triviaEnded = false;
+        startButton.css('visibility', 'visible');
+        resetButton.css('visibility', 'hidden');
+    } else {
+        return;
     }
 }
 
@@ -331,7 +340,7 @@ function handleTrivia() {
         return;
     }
 
-    console.log(currentResponse);
+    //console.log(currentResponse);
     if (currentResponse) {
         score++;
         currentResponse = false;
@@ -340,7 +349,7 @@ function handleTrivia() {
     if (currentQuestion < totalQuestionsUsed) {
         //console.log('First case is being run!');
         continueTrivia();
-        console.log('Lap - ' + currentQuestion);
+        //console.log('Lap - ' + currentQuestion);
     } else {
         endTrivia();
     }
@@ -353,5 +362,22 @@ function endTrivia() {
     console.log('Trivia has ended.');
     console.log('Score: ' + score);
     nextButton.css('visibility', 'hidden');
-    scoreHolder.html('<h3>Score: ' + score + ' out of ' + totalQuestionsUsed +'</h3>');
+    scoreHolder.append(scoreResponse(score));
+    scoreHolder.append('<h3>Score: ' + score + ' out of ' + totalQuestionsUsed +'</h3>');
+    resetButton.css('visibility', 'visible');
 }
+
+function scoreResponse(inputValue) {
+    var message = $('<h2>');
+    var threshold1 = totalQuestionsUsed / 2;
+    var threshold2 = totalQuestionsUsed / 4 * 3;
+    if (inputValue <= threshold1) {
+        message.text('Better luck next time!');
+    } else if (inputValue > threshold1 && inputValue <= threshold2) {
+        message.text('Pretty good!');
+    } else {
+        message.text('Great work!');
+    }
+    return message;
+}
+
