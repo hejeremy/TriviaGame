@@ -230,6 +230,7 @@ function resetFunction() {
         scrambleArray(triviaKeys);
         score = 0;
         currentQuestion = 0;
+        scoreHolder.empty();
         triviaEnded = false;
         startButton.css('visibility', 'visible');
         resetButton.css('visibility', 'hidden');
