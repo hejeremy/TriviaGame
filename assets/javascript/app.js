@@ -128,8 +128,8 @@ var seconds = resetTime;
 
 //Question values
 var triviaKeys = loadKeys(triviaQuestions);
-scrambleArray(triviaKeys);
 var score = 0;
+var numberIncorrect = 0;
 var currentResponse = false;
 
 //Question tracking variables
@@ -186,31 +186,65 @@ var intervalHolder = {
 }
 
 //Initial setups
-var triviaEnded = false;
+var triviaEnded = true;
+var showAnswer = false;
+var currentAnswer = 'N/A';
+var currentCorrect = 'N/A';
 var timer = $('#timer');
 timer.html("<h3 class='text-center'>" + intervalHolder.timeConverter(seconds) + "</h3>");
+timer.css('visibility', 'hidden');
 var questionHolder = $('#questionHolder');
 var answerHolder = $('#answerHolder');
-var startButton = $('#startButton');
-var nextButton = $('#nextButton');
-nextButton.css('visibility', 'hidden');
-var resetButton = $('#resetButton');
-resetButton.css('visibility', 'hidden');
 var scoreHolder = $('#scoreHolder');
 
+//Permanent buttons
+var startButton;
+var nextButton;
+var resetButton;
+setPermanentButtons();
+setPermanentEvents();
+
+resetFunction();
+
 //Set non removed buttons
-startButton.mouseup(startFunction);
-nextButton.mouseup(nextFunction);
-resetButton.mouseup(resetFunction);
+function setPermanentButtons() {
+    startButton = $('<button>');
+    startButton.attr('id','startButton');
+    startButton.addClass('btn btn-default');
+    startButton.text('Start');
+    $('#buttonHolder1').append(startButton);
+
+    nextButton = $('<button>');
+    nextButton.attr('id','nextButton');
+    nextButton.addClass('btn btn-default');
+    nextButton.text('Next');
+    $('#buttonHolder2').append(nextButton);
+    nextButton.css('visibility', 'hidden');
+
+    resetButton = $('<button>');
+    resetButton.attr('id','resetButton');
+    resetButton.addClass('btn btn-default');
+    resetButton.text('Play Again');
+    $('#buttonHolder3').append(resetButton);
+    resetButton.css('visibility', 'hidden');
+}
+
+function setPermanentEvents() {
+    startButton.mouseup(startFunction);
+    nextButton.mouseup(nextFunction);
+    resetButton.mouseup(resetFunction);
+}
 
 function startFunction() {
+    timer.css('visibility', 'visible');
     if (triviaEnded) {
-        return;
-    } else {
+        triviaEnded = false;
         startButton.css('visibility', 'hidden');
         nextButton.css('visibility', 'visible');
         scoreHolder.empty();
         handleTrivia();
+    } else {
+        return;
     }
     //continueTrivia();
 }
@@ -230,8 +264,14 @@ function resetFunction() {
         scrambleArray(triviaKeys);
         score = 0;
         currentQuestion = 0;
+        numberIncorrect = 0;
+        currentAnswer = 'N/A';
+        currentCorrect = 'N/A';
         scoreHolder.empty();
-        triviaEnded = false;
+        //triviaEnded = false;
+        resetTime = 20;
+        timer.html("<h3 class='text-center'>" + intervalHolder.reset() + "</h3>");
+        timer.html("<h3 class='text-center'>" + intervalHolder.timeConverter(seconds) + "</h3>");
         startButton.css('visibility', 'visible');
         resetButton.css('visibility', 'hidden');
     } else {
@@ -281,6 +321,9 @@ function emptyTrivia() {
 
 function continueTrivia() {
     emptyTrivia();
+    currentAnswer = 'N/A';
+    currentCorrect = 'N/A';
+    resetTime = 20;
 
     var questionObject = triviaQuestions[triviaKeys[currentQuestion]];
     questionHolder.html('<p>' + questionObject['question'] + '</p>');
@@ -288,6 +331,8 @@ function continueTrivia() {
 
     var responses = questionObject['incorrect'].slice(0);
     var correctElement = questionObject['correct'];
+    currentCorrect = correctElement;
+    //console.log(currentCorrect);
     responses.push(correctElement);
 
     //console.log(correctElement);
@@ -320,6 +365,33 @@ function continueTrivia() {
     setInputChoice();
 
     currentQuestion++;
+    showAnswer = true;
+    continueCounting();
+}
+
+function handleAnswer(inputResult, inputAnswer) {
+    resetTime = 5;
+    emptyTrivia();
+    //console.log(inputResult);
+    //console.log(inputAnswer);
+    var answerDisplay = $('<h3>');
+    var yourDisplay = $('<h3>');
+    var correctDisplay = $('<h3>');
+    if (inputResult) {
+        answerDisplay.text('Correct!');
+        answerHolder.append(answerDisplay);
+    } else {
+        answerDisplay.text('Incorrect');
+        yourDisplay.text('Your Answer: '+ inputAnswer);
+        correctDisplay.text('Correct Answer: ' + currentCorrect);
+        answerHolder.append(answerDisplay);
+        answerHolder.append(yourDisplay);
+        answerHolder.append(correctDisplay);
+    }
+    continueCounting();
+}
+
+function continueCounting() {
     intervalHolder.reset();
     intervalHolder.stopSecondCounter();
     if (triviaEnded) {
@@ -332,7 +404,9 @@ function continueTrivia() {
 function setInputChoice() {
     $('.inputChoice').on('change', function() {
         currentResponse = $(this).data('returnValue');
+        currentAnswer = $(this).text();
         //console.log(currentResponse);
+        //console.log(currentAnswer);
     });
 }
 
@@ -342,10 +416,19 @@ function handleTrivia() {
     }
 
     //console.log(currentResponse);
-    if (currentResponse) {
-        score++;
-        currentResponse = false;
+    if (showAnswer) {
+        handleAnswer(currentResponse, currentAnswer);
+        showAnswer = false;
+        return;
+    } else {
+        if (currentResponse) {
+            score++;
+            currentResponse = false;
+        } else {
+            numberIncorrect++;
+        }
     }
+
 
     if (currentQuestion < totalQuestionsUsed) {
         //console.log('First case is being run!');
@@ -365,6 +448,9 @@ function endTrivia() {
     nextButton.css('visibility', 'hidden');
     scoreHolder.append(scoreResponse(score));
     scoreHolder.append('<h3>Score: ' + score + ' out of ' + totalQuestionsUsed +'</h3>');
+    numberIncorrect--;
+    scoreHolder.append('<h3>Number Incorrect: ' + numberIncorrect + '</h3>');
+    timer.css('visibility', 'hidden');
     resetButton.css('visibility', 'visible');
 }
 
