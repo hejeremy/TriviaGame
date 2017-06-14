@@ -53,7 +53,7 @@ var questionsMH = {
     question9: {
         question: 'What do you get when you combine Blue Mushroom + Herb?',
         correct: 'Potion',
-        incorrect: ['Dash Juice', 'Antidote', 'Clenser', 'Energy Drink'],
+        incorrect: ['Dash Juice', 'Antidote', 'Cleanser', 'Energy Drink'],
     },
     question10: {
         question: 'Which monster has two break stages for its tail?',
@@ -126,9 +126,9 @@ var questionsMH = {
         incorrect: ['Nargacuga', 'Zamtrios', 'Khezu', 'Arzuros'],
     },
     question24: {
-        question: 'What monster looks like a big snow bunny?',
-        correct: 'Lagombi',
-        incorrect: ['Nargacuga', 'Zamtrios', 'Khezu', 'Arzuros'],
+        question: 'What monster is known for eating lots of honey?',
+        correct: 'Arzuros',
+        incorrect: ['Nerscylla', 'Zamtrios', 'Kecha Wacha', 'Lagombi'],
     },
     question25: {
         question: 'What monster resorts to eating it\'s own tail when it is weakend?',
@@ -352,7 +352,7 @@ function scrambleArray(inputArray) {
     var i, j, x;
     var arrayLength = inputArray.length;
     for (i = 0; i < inputArray.length; i++) {
-        j = Math.floor(Math.random()*(arrayLength-1));
+        j = Math.floor(Math.random()*(arrayLength));
         x = inputArray[i];
         inputArray[i] = inputArray[j];
         inputArray[j] = x;
