@@ -122,7 +122,7 @@ var triviaQuestions = {
 
 //Interval values
 var secondCounter;
-var resetTime = 5;
+var resetTime = 20;
 var seconds = resetTime;
 
 //Question values
@@ -133,7 +133,7 @@ var currentResponse = false;
 
 //Question tracking variables
 var currentQuestion = 0;
-var totalQuestionsUsed = 8;
+var totalQuestionsUsed = 10;
 
 //Interval functions
 var intervalHolder = {
