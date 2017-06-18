@@ -64,9 +64,9 @@ var questionsMH = {
         incorrect: ['3', '20', '60', '99'],
     },
     question12: {
-        question: 'What element is a Rathalos weakest to?',
-        correct: 'Dragon',
-        incorrect: ['Fire', 'Water', 'Ice', 'Thunder'],
+        question: 'What item can knock a Rathalos out of flight and stun it?',
+        correct: 'Flash Bomb',
+        incorrect: ['Dung Bomb', 'Paint Ball', 'Throwing Knife', 'Barrel Bomb'],
     },
     question13: {
         question: 'What element is a Zinogre weakest to?',
@@ -76,12 +76,12 @@ var questionsMH = {
     question14: {
         question: 'Which game was underwater combat introduced?',
         correct: 'Monster Hunter Tri',
-        incorrect: ['Monster Hunter 4U', 'Monster Hunter 3U', 'Monster Hunter Generations', 'Monster Hunter'],
+        incorrect: ['Monster Hunter 4U', 'Monster Hunter 3U', 'Monster Hunter Generations', 'Monster Hunter 4'],
     },
     question15: {
         question: 'Which game was monster mounting introduced?',
-        correct: 'Monster Hunter 4U',
-        incorrect: ['Monster Hunter Tri', 'Monster Hunter 3U', 'Monster Hunter Generations', 'Monster Hunter'],
+        correct: 'Monster Hunter 4',
+        incorrect: ['Monster Hunter Tri', 'Monster Hunter 3U', 'Monster Hunter Generations', 'Monster Hunter 4U'],
     },
     question16: {
         question: 'Which armor skill prevents bouncing when hitting a monster?',
@@ -166,6 +166,7 @@ var styleValues = {
     g: 225,
     b: 255,
     a: 0.5,
+    title: 'Monster Hunter Trivia',
     background: "url('assets/images/backgroundMonsterHunter.jpg')",
     cursor: "url('assets/images/hbg.png'), auto",
 }
@@ -315,13 +316,10 @@ function nextFunction() {
 function resetFunction() {
     if(triviaEnded) {
         $('body').css('background-image', styleValues.background);
-        $('#timer').css('background', rgbaConvert(styleValues));
-        $('#holderQA').css('background', rgbaConvert(styleValues));
+        $('#timer, #holderQA').css('background', rgbaConvert(styleValues));
 
-        //testing
+        $('title,#titleValue').text(styleValues.title);
         $('html,body').css('cursor', styleValues.cursor);
-        //$('html,body').css('cursor', 'nesw-resize');
-        //testing
 
         scrambleArray(triviaKeys);
         score = 0;
@@ -330,8 +328,8 @@ function resetFunction() {
         currentAnswer = 'N/A';
         currentCorrect = 'N/A';
         scoreHolder.empty();
-        //triviaEnded = false;
         resetTime = 20;
+
         timer.html("<h3 class='text-center'>" + intervalHolder.reset() + "</h3>");
         timer.html("<h3 class='text-center'>" + intervalHolder.timeConverter(seconds) + "</h3>");
         timer.css('visibility', 'hidden');
