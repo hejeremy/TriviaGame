@@ -320,8 +320,8 @@ function resetFunction() {
         $('body').css('background-image', styleValues.background);
         $('#timer, #holderQA').css('background', rgbaConvert(styleValues));
 
-        $('title,#titleValue').text(styleValues.title);
-        $('html,body').css('cursor', styleValues.cursor);
+        $('title, #titleValue').text(styleValues.title);
+        $('html, body').css('cursor', styleValues.cursor);
 
         scrambleArray(triviaKeys);
         score = 0;
