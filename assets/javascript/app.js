@@ -64,9 +64,9 @@ var questionsMH = {
         incorrect: ['3', '20', '60', '99'],
     },
     question12: {
-        question: 'What item can knock a Rathalos out of flight and stun it?',
-        correct: 'Flash Bomb',
-        incorrect: ['Dung Bomb', 'Paint Ball', 'Throwing Knife', 'Barrel Bomb'],
+        question: 'Which monster can have it\'s tail cut off?',
+        correct: 'Barroth',
+        incorrect: ['Great Jaggi', 'Qurupeco', 'Plesioth', 'Duramboros'],
     },
     question13: {
         question: 'What element is a Zinogre weakest to?',
