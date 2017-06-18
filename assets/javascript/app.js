@@ -66,7 +66,7 @@ var questionsMH = {
     question12: {
         question: 'Which monster can have it\'s tail cut off?',
         correct: 'Barroth',
-        incorrect: ['Great Jaggi', 'Qurupeco', 'Plesioth', 'Duramboros'],
+        incorrect: ['Great Jaggi', 'Qurupeco', 'Plesioth'],
     },
     question13: {
         question: 'What element is a Zinogre weakest to?',
