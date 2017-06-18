@@ -314,8 +314,8 @@ function nextFunction() {
 function resetFunction() {
     if(triviaEnded) {
         $('body').css('background-image', styleValues.background);
-        $('#timer.css').css('background', rgbaConvert(styleValues));
-        $('#holderQA.css').css('background', rgbaConvert(styleValues));
+        $('#timer').css('background', rgbaConvert(styleValues));
+        $('#holderQA').css('background', rgbaConvert(styleValues));
         scrambleArray(triviaKeys);
         score = 0;
         currentQuestion = 0;

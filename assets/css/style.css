@@ -1,6 +1,5 @@
 .jumbotron {
     padding: 10px;
-    background: rgba(125, 125, 125, 0.5);
     h1 {
         font-size: 20px;
     }
@@ -13,6 +12,8 @@ body {
     background-size: cover;
 }
 
+/*
 #timer, #holderQA {
     background: rgba(175, 225, 255, 0.5);
 }
+*/
