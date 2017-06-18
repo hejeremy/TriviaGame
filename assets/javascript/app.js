@@ -24,7 +24,7 @@ var questionsMH = {
         incorrect: ['Potion + Blue Mushroom', 'Herb + Tropical Berry', 'Herb + Mega Dash Juice', 'Potion + Nitroshroom'],
     },
     question4: {
-        question: 'Which weapon cannot be used with/as a shield, nor can one be attached?',
+        question: 'Which weapon cannot block?',
         correct: 'Switch Axe',
         incorrect: ['Greatsword', 'Charge Blade', 'Heavy Bowgun', 'Lance'],
     },
@@ -242,6 +242,7 @@ var triviaEnded = true;
 var showAnswer = false;
 var currentAnswer = 'N/A';
 var currentCorrect = 'N/A';
+var answered = false;
 var timer = $('#timer');
 var questionHolder = $('#questionHolder');
 var answerHolder = $('#answerHolder');
@@ -308,6 +309,7 @@ function nextFunction() {
     if (triviaEnded) {
         return;
     } else {
+        answered = true;
         handleTrivia();
     }
 }
@@ -435,7 +437,6 @@ function continueTrivia() {
         } else {
             response.data('returnValue', false);
         }
-        //console.log(responses[i]);
         response.text(responses[i]);
         responseLabel.append(response);
         responseLabel.append(' ' + responses[i]);
@@ -444,16 +445,15 @@ function continueTrivia() {
     }
     setInputChoice();
 
+    answered = false;
     currentQuestion++;
     showAnswer = true;
     continueCounting();
 }
 
-function handleAnswer(inputResult, inputAnswer) {
+function handleAnswer(inputResult, inputAnswer, inputAnswered) {
     resetTime = 5;
     emptyTrivia();
-    //console.log(inputResult);
-    //console.log(inputAnswer);
     var answerDisplay = $('<h3>');
     var yourDisplay = $('<h3>');
     var correctDisplay = $('<h3>');
@@ -461,7 +461,7 @@ function handleAnswer(inputResult, inputAnswer) {
         answerDisplay.text('Correct!');
         answerHolder.append(answerDisplay);
     } else {
-        if (inputAnswer === 'N/A') {
+        if (!inputAnswered) {
             answerDisplay.text('Times Up!');
         } else {
             answerDisplay.text('Incorrect');
@@ -487,6 +487,7 @@ function continueCounting() {
 
 function setInputChoice() {
     $('.inputChoice').on('change', function() {
+        answered = true;
         currentResponse = $(this).data('returnValue');
         currentAnswer = $(this).text();
         //console.log(currentResponse);
@@ -501,7 +502,7 @@ function handleTrivia() {
 
     //console.log(currentResponse);
     if (showAnswer) {
-        handleAnswer(currentResponse, currentAnswer);
+        handleAnswer(currentResponse, currentAnswer, answered);
         showAnswer = false;
         return;
     } else {
