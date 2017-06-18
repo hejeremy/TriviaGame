@@ -24,7 +24,7 @@ var questionsMH = {
         incorrect: ['Potion + Blue Mushroom', 'Herb + Tropical Berry', 'Herb + Mega Dash Juice', 'Potion + Nitroshroom'],
     },
     question4: {
-        question: 'Which weapon does not come with or cannot be used as a shield?',
+        question: 'Which weapon cannot be used with/as a shield, nor can one be attached?',
         correct: 'Switch Axe',
         incorrect: ['Greatsword', 'Charge Blade', 'Heavy Bowgun', 'Lance'],
     },
