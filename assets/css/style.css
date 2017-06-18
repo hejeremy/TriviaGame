@@ -1,6 +1,18 @@
 .jumbotron {
     padding: 10px;
+    background: rgba(125, 125, 125, 0.5);
     h1 {
         font-size: 20px;
     }
+}
+
+body {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#timer, #holderQA {
+    background: rgba(175, 225, 255, 0.5);
 }

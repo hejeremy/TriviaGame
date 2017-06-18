@@ -6,7 +6,7 @@
  * Last Update: 6-14-2017
  */
 
-$('body').css('background-image', 'url(assets/images/palico1.png)');
+//$('body').css('background-image', 'url(assets/images/palico1.png)');
 
 //Holds all trivia questions
 var questionsMH = {
@@ -304,6 +304,7 @@ function nextFunction() {
 //Resets so you can play again!
 function resetFunction() {
     if(triviaEnded) {
+        $('body').css('background-image', 'url(assets/images/backgroundMonsterHunter.jpg)');
         scrambleArray(triviaKeys);
         score = 0;
         currentQuestion = 0;
@@ -322,6 +323,10 @@ function resetFunction() {
     } else {
         return;
     }
+}
+
+function imageFileParse(inputFile) {
+    return 'url(assets/images/' + inputFile + ')';
 }
 
 //Returns length of object
