@@ -167,6 +167,7 @@ var styleValues = {
     b: 255,
     a: 0.5,
     background: "url('assets/images/backgroundMonsterHunter.jpg')",
+    cursor: "url('assets/images/hbg.png'), auto",
 }
 
 //Interval values
@@ -316,6 +317,12 @@ function resetFunction() {
         $('body').css('background-image', styleValues.background);
         $('#timer').css('background', rgbaConvert(styleValues));
         $('#holderQA').css('background', rgbaConvert(styleValues));
+
+        //testing
+        $('html,body').css('cursor', styleValues.cursor);
+        //$('html,body').css('cursor', 'nesw-resize');
+        //testing
+
         scrambleArray(triviaKeys);
         score = 0;
         currentQuestion = 0;
