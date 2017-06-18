@@ -431,8 +431,12 @@ function handleAnswer(inputResult, inputAnswer) {
         answerDisplay.text('Correct!');
         answerHolder.append(answerDisplay);
     } else {
-        answerDisplay.text('Incorrect');
-        yourDisplay.text('Your Answer: '+ inputAnswer);
+        if (inputAnswer === 'N/A') {
+            answerDisplay.text('Times Up!');
+        } else {
+            answerDisplay.text('Incorrect');
+            yourDisplay.text('Your Answer: '+ inputAnswer);
+        }
         correctDisplay.text('Correct Answer: ' + currentCorrect);
         answerHolder.append(answerDisplay);
         answerHolder.append(yourDisplay);
