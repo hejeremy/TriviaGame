@@ -6,8 +6,6 @@
  * Last Update: 6-14-2017
  */
 
-//$('body').css('background-image', 'url(assets/images/palico1.png)');
-
 //Holds all trivia questions
 var questionsMH = {
     question1: {
@@ -162,6 +160,15 @@ var questionsMH = {
     },
 }
 
+//CSS and background values
+var styleValues = {
+    r: 175,
+    g: 225,
+    b: 255,
+    a: 0.5,
+    background: "url('assets/images/backgroundMonsterHunter.jpg')",
+}
+
 //Interval values
 
 var secondCounter;
@@ -271,12 +278,14 @@ function setPermanentButtons() {
     resetButton.css('visibility', 'hidden');
 }
 
+//Sets permanent buttons
 function setPermanentEvents() {
     startButton.mouseup(startFunction);
     nextButton.mouseup(nextFunction);
     resetButton.mouseup(resetFunction);
 }
 
+//Starts trivia
 function startFunction() {
     timer.css('visibility', 'visible');
     if (triviaEnded) {
@@ -304,7 +313,9 @@ function nextFunction() {
 //Resets so you can play again!
 function resetFunction() {
     if(triviaEnded) {
-        $('body').css('background-image', 'url(assets/images/backgroundMonsterHunter.jpg)');
+        $('body').css('background-image', styleValues.background);
+        $('#timer.css').css('background', rgbaConvert(styleValues));
+        $('#holderQA.css').css('background', rgbaConvert(styleValues));
         scrambleArray(triviaKeys);
         score = 0;
         currentQuestion = 0;
@@ -325,8 +336,22 @@ function resetFunction() {
     }
 }
 
+//Parses image file location
 function imageFileParse(inputFile) {
-    return 'url(assets/images/' + inputFile + ')';
+    var returnValue = "url(assets/images/";
+    returnValue += inputFile + ")";
+    return returnValue;
+}
+
+//Returns rgba value for background css
+function rgbaConvert(inputObject) {
+    var returnValue = 'rgba\(' ;
+    returnValue += inputObject.r + ',';
+    returnValue += inputObject.g + ',';
+    returnValue += inputObject.b + ',';
+    returnValue += inputObject.a + '\)';
+
+    return returnValue;
 }
 
 //Returns length of object
