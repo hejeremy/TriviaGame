@@ -471,17 +471,17 @@ var questionsCooking = {
     },
 }
 
-//CSS and background values
+//Initialize CSS, image, audio values
 var styleValues = {
-    r: 0,
-    g: 0,
-    b: 0,
-    a: 0,
-    icon: '',
-    title: '',
-    background: '',
-    cursor: '',
-    audio: '',
+    r: 255,
+    g: 255,
+    b: 255,
+    a: 0.5,
+    icon: 'pot.png',
+    title: 'Cooking Trivia',
+    background: 'backgroundKitchen.jpg',
+    cursor: 'kitchenUtensils.png',
+    audio: 'bgmCooking.mp3',
 }
 
 //Interval values
@@ -593,7 +593,9 @@ setPermanentEvents();
 var audioCorrect = new Audio(audioFileParse('correct.mp3'));
 var audioIncorrect = new Audio(audioFileParse('incorrect.mp3'));
 var audioTimesUp = new Audio(audioFileParse('timesUp.mp3'));
-var audioCurrent = new Audio(audioFileParse('bgmCooking.mp3'));
+var audioCurrent = new Audio(audioFileParse(styleValues.audio));
+
+//Sets main audio
 function setAudio(inputString) {
     audioCurrent.pause();
     audioCurrent.currentTime = 0;
@@ -618,12 +620,12 @@ function setPermanentButtons() {
     $('#startHolder').html(startButton);
 
     /*
-    toggleButton = $('<button>');
-    toggleButton.attr('id','toggleButton');
-    toggleButton.addClass('btn btn-default col-md-4');
-    toggleButton.text('Different Trivia');
-    $('#buttonHolder1').append(toggleButton);
-    */
+       toggleButton = $('<button>');
+       toggleButton.attr('id','toggleButton');
+       toggleButton.addClass('btn btn-default col-md-4');
+       toggleButton.text('Different Trivia');
+       $('#buttonHolder1').append(toggleButton);
+       */
 
     nextButton = $('<button>');
     nextButton.attr('id','nextButton');
@@ -681,17 +683,17 @@ function startFunction() {
 
 //Cycles through the available trivias
 /*
-function toggleFunction() {
-    if (triviaEnded) {
-        currentTrivia = (currentTrivia + 1) % triviaList.length;
-        var newTrivia = triviaList[currentTrivia];
-        changeStyleValues(newTrivia);
-        resetFunction();
-    } else {
-        return;
-    }
-}
-*/
+   function toggleFunction() {
+   if (triviaEnded) {
+   currentTrivia = (currentTrivia + 1) % triviaList.length;
+   var newTrivia = triviaList[currentTrivia];
+   changeStyleValues(newTrivia);
+   resetFunction();
+   } else {
+   return;
+   }
+   }
+   */
 
 //Resets timer and goes to next questions
 function nextFunction() {
@@ -764,8 +766,8 @@ function changeStyleValues(inputString) {
             styleValues.g = 255;
             styleValues.b = 255;
             styleValues.a = 0.5;
-            styleValues.icon = 'pot.png'
-                styleValues.title = 'Cooking Trivia';
+            styleValues.icon = 'pot.png';
+            styleValues.title = 'Cooking Trivia';
             styleValues.background = 'backgroundKitchen.jpg';
             styleValues.cursor = 'kitchenUtensils.png';
             styleValues.audio = 'bgmCooking.mp3';
@@ -775,8 +777,8 @@ function changeStyleValues(inputString) {
             styleValues.g = 225;
             styleValues.b = 255;
             styleValues.a = 0.5;
-            styleValues.icon = 'potion.png'
-                styleValues.title = 'Monster Hunter Trivia';
+            styleValues.icon = 'potion.png';
+            styleValues.title = 'Monster Hunter Trivia';
             styleValues.background = 'backgroundMonsterHunter.jpg';
             styleValues.cursor = 'hbg.png';
             styleValues.audio = 'bgmMH.mp3';
@@ -786,8 +788,8 @@ function changeStyleValues(inputString) {
             styleValues.g = 170;
             styleValues.b = 210;
             styleValues.a = 0.5;
-            styleValues.icon = 'rune.jpeg'
-                styleValues.title = 'Bloodborne Trivia';
+            styleValues.icon = 'rune.jpeg';
+            styleValues.title = 'Bloodborne Trivia';
             styleValues.background = 'backgroundBloodborne.jpg';
             styleValues.cursor = 'sawCleaver.png';
             styleValues.audio = 'bgmBB.mp3';
