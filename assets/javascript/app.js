@@ -324,7 +324,7 @@ var questionsBB = {
     questionXX: {
         question: 'What attack animation does your hunter do when performing a backstab Visceral Attack on a Goliath Pig?',
         correct: 'You fist it... in the butthole',
-        incorrect: ['You perform a massive blow to it\'s backside with your weapon', 'You knock it\'s legs out from under it', 'You jump onto it\'s back and deal a surgical strike to the back of its head'],
+        incorrect: ['You perform a massive blow to its backside with your weapon', 'You knock its legs out from under it', 'You jump onto its back and deal a surgical strike to the back of its head'],
     },
 }
 
