@@ -481,7 +481,7 @@ var styleValues = {
     title: 'Cooking Trivia',
     background: 'backgroundKitchen.jpg',
     cursor: 'kitchenUtensils.png',
-    audio: 'bgmCooking.mp3',
+    audio: 'bgmCooking.wav',
 }
 
 //Interval values
@@ -590,9 +590,9 @@ setPermanentButtons();
 setPermanentEvents();
 
 //Audio
-var audioCorrect = new Audio(audioFileParse('correct.mp3'));
-var audioIncorrect = new Audio(audioFileParse('incorrect.mp3'));
-var audioTimesUp = new Audio(audioFileParse('timesUp.mp3'));
+var audioCorrect = new Audio(audioFileParse('correct.wav'));
+var audioIncorrect = new Audio(audioFileParse('incorrect.wav'));
+var audioTimesUp = new Audio(audioFileParse('timesUp.wav'));
 var audioCurrent = new Audio(audioFileParse(styleValues.audio));
 
 //Sets main audio
@@ -770,7 +770,7 @@ function changeStyleValues(inputString) {
             styleValues.title = 'Cooking Trivia';
             styleValues.background = 'backgroundKitchen.jpg';
             styleValues.cursor = 'kitchenUtensils.png';
-            styleValues.audio = 'bgmCooking.mp3';
+            styleValues.audio = 'bgmCooking.wav';
             break;
         case 'MonsterHunter':
             styleValues.r = 175;
@@ -781,7 +781,7 @@ function changeStyleValues(inputString) {
             styleValues.title = 'Monster Hunter Trivia';
             styleValues.background = 'backgroundMonsterHunter.jpg';
             styleValues.cursor = 'hbg.png';
-            styleValues.audio = 'bgmMH.mp3';
+            styleValues.audio = 'bgmMH.wav';
             break;
         case 'Bloodborne':
             styleValues.r = 120;
@@ -792,7 +792,7 @@ function changeStyleValues(inputString) {
             styleValues.title = 'Bloodborne Trivia';
             styleValues.background = 'backgroundBloodborne.jpg';
             styleValues.cursor = 'sawCleaver.png';
-            styleValues.audio = 'bgmBB.mp3';
+            styleValues.audio = 'bgmBB.wav';
             break;
         default:
             break;
