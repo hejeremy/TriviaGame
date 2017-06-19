@@ -16,6 +16,12 @@ body {
     background: rgba(255,255,255,0.5);
 }
 
-.btn {
+.btn, .form-control {
     background: rgba(255,255,255,0.8);
+    max-width: 200px;
+}
+
+#selectList {
+    display: block;
+    margin: 0 auto;
 }

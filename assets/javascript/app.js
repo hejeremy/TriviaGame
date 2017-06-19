@@ -473,14 +473,14 @@ var questionsCooking = {
 
 //CSS and background values
 var styleValues = {
-    r: 175,
-    g: 225,
-    b: 255,
-    a: 0.5,
-    icon: 'potion.png',
-    title: 'Monster Hunter Trivia',
-    background: "backgroundMonsterHunter.jpg",
-    cursor: "hbg.png",
+    r: 0,
+    g: 0,
+    b: 0,
+    a: 0,
+    icon: '',
+    title: '',
+    background: '',
+    cursor: '',
 }
 
 //Interval values
@@ -492,9 +492,9 @@ var seconds = resetTime;
 //Trivia list
 var currentTrivia = 0;
 var triviaList = [];
-triviaList.push('triviaMH');
-triviaList.push('triviaBB');
-triviaList.push('triviaCooking');
+triviaList.push('Cooking');
+triviaList.push('MonsterHunter');
+triviaList.push('Bloodborne');
 
 //Question values
 var triviaQuestions = loadTrivia(triviaList[currentTrivia]);
@@ -506,14 +506,14 @@ var currentResponse = false;
 
 function loadTrivia(inputString) {
     switch(inputString) {
-        case 'triviaMH':
+        case 'Cooking':
+            return questionsCooking;
+            break;
+        case 'MonsterHunter':
             return questionsMH;
             break;
-        case 'triviaBB':
+        case 'Bloodborne':
             return questionsBB;
-            break;
-        case 'triviaCooking':
-            return questionsCooking;
             break;
         default:
             break;
@@ -583,10 +583,14 @@ var holderQA = $('#holderQA');
 var startButton;
 var nextButton;
 var resetButton;
-var toggleButton;
+//var toggleButton;
+var selectList;
 setPermanentButtons();
 setPermanentEvents();
 
+
+
+//Initial reset
 resetFunction();
 
 //Set non removed buttons
@@ -595,13 +599,15 @@ function setPermanentButtons() {
     startButton.attr('id','startButton');
     startButton.addClass('btn btn-default');
     startButton.text('Start');
-    $('#buttonHolder1').append(startButton);
+    $('#startHolder').html(startButton);
 
+    /*
     toggleButton = $('<button>');
     toggleButton.attr('id','toggleButton');
-    toggleButton.addClass('btn btn-default');
+    toggleButton.addClass('btn btn-default col-md-4');
     toggleButton.text('Different Trivia');
     $('#buttonHolder1').append(toggleButton);
+    */
 
     nextButton = $('<button>');
     nextButton.attr('id','nextButton');
@@ -616,14 +622,27 @@ function setPermanentButtons() {
     resetButton.text('Play Again');
     $('#buttonHolder3').append(resetButton);
     resetButton.css('visibility', 'hidden');
+
+    selectList = $('<select>');
+    selectList.attr('id', 'selectList');
+    selectList.addClass('form-control');
+    for (var i=0; i<triviaList.length; i++) {
+        var option = $('<option>');
+        option.addClass('triviaOption');
+        option.data('triviaValue', i);
+        option.text(triviaList[i]);
+        selectList.append(option);
+    }
+    $('#selectHolder').append(selectList);
 }
 
 //Sets permanent buttons
 function setPermanentEvents() {
     startButton.mouseup(startFunction);
-    toggleButton.mouseup(toggleFunction);
+    //toggleButton.mouseup(toggleFunction);
     nextButton.mouseup(nextFunction);
     resetButton.mouseup(resetFunction);
+    selectList.change(selectFunction);
 }
 
 //Starts trivia
@@ -632,7 +651,8 @@ function startFunction() {
     if (triviaEnded) {
         triviaEnded = false;
         startButton.css('visibility', 'hidden');
-        toggleButton.css('visibility', 'hidden');
+        selectList.css('visibility', 'hidden');
+        //toggleButton.css('visibility', 'hidden');
         nextButton.css('visibility', 'visible');
         holderQA.css('visibility', 'visible');
         scoreHolder.empty();
@@ -644,6 +664,7 @@ function startFunction() {
 }
 
 //Cycles through the available trivias
+/*
 function toggleFunction() {
     if (triviaEnded) {
         currentTrivia = (currentTrivia + 1) % triviaList.length;
@@ -654,6 +675,7 @@ function toggleFunction() {
         return;
     }
 }
+*/
 
 //Resets timer and goes to next questions
 function nextFunction() {
@@ -668,6 +690,9 @@ function nextFunction() {
 //Resets so you can play again!
 function resetFunction() {
     if(triviaEnded) {
+        var newTrivia = triviaList[currentTrivia];
+        changeStyleValues(newTrivia);
+
         $('#iconValue').attr('href', iconFileParse(styleValues.icon));
         $('body').css('background-image', imageFileParse(styleValues.background));
         $('#timer, #holderQA').css('background', rgbaConvert(styleValues));
@@ -675,7 +700,7 @@ function resetFunction() {
         $('title, #titleValue').text(styleValues.title);
         $('html, body').css('cursor', cursorFileParse(styleValues.cursor));
 
-        triviaQuestions = loadTrivia(triviaList[currentTrivia]);
+        triviaQuestions = loadTrivia(newTrivia);
         objectLength = 0;
         triviaKeys = loadKeys(triviaQuestions);
         scrambleArray(triviaKeys);
@@ -692,9 +717,22 @@ function resetFunction() {
         timer.html("<h3 class='text-center'>" + intervalHolder.timeConverter(seconds) + "</h3>");
         timer.css('visibility', 'hidden');
         startButton.css('visibility', 'visible');
-        toggleButton.css('visibility', 'visible');
+        selectList.css('visibility', 'visible');
+        //toggleButton.css('visibility', 'visible');
         resetButton.css('visibility', 'hidden');
         holderQA.css('visibility', 'hidden');
+    } else {
+        return;
+    }
+}
+
+//Allows you to select which trivia
+function selectFunction() {
+    if (triviaEnded) {
+        var optionElement = $(this).find('option:selected');
+        currentTrivia = optionElement.data('triviaValue');
+        //console.log(currentTrivia);
+        resetFunction();
     } else {
         return;
     }
@@ -703,33 +741,33 @@ function resetFunction() {
 //Changes styleValues depending on current input
 function changeStyleValues(inputString) {
     switch (inputString) {
-        case 'triviaMH':
+        case 'MonsterHunter':
             styleValues.r = 175;
             styleValues.g = 225;
             styleValues.b = 255;
             styleValues.a = 0.5;
             styleValues.icon = 'potion.png'
-            styleValues.title = 'Monster Hunter Trivia';
+                styleValues.title = 'Monster Hunter Trivia';
             styleValues.background = 'backgroundMonsterHunter.jpg';
             styleValues.cursor = 'hbg.png';
             break;
-        case 'triviaBB':
+        case 'Bloodborne':
             styleValues.r = 120;
             styleValues.g = 170;
             styleValues.b = 210;
             styleValues.a = 0.5;
             styleValues.icon = 'rune.jpeg'
-            styleValues.title = 'Bloodborne Trivia';
+                styleValues.title = 'Bloodborne Trivia';
             styleValues.background = 'backgroundBloodborne.jpg';
             styleValues.cursor = 'sawCleaver.png';
             break;
-        case 'triviaCooking':
+        case 'Cooking':
             styleValues.r = 255;
             styleValues.g = 255;
             styleValues.b = 255;
             styleValues.a = 0.5;
             styleValues.icon = 'pot.png'
-            styleValues.title = 'Cooking Trivia';
+                styleValues.title = 'Cooking Trivia';
             styleValues.background = 'backgroundKitchen.jpg';
             styleValues.cursor = 'kitchenUtensils.png';
             break;
