@@ -481,6 +481,7 @@ var styleValues = {
     title: '',
     background: '',
     cursor: '',
+    audio: '',
 }
 
 //Interval values
@@ -588,6 +589,21 @@ var selectList;
 setPermanentButtons();
 setPermanentEvents();
 
+//Audio
+var audioCorrect = new Audio(audioFileParse('correct.mp3'));
+var audioIncorrect = new Audio(audioFileParse('incorrect.mp3'));
+var audioTimesUp = new Audio(audioFileParse('timesUp.mp3'));
+var audioCurrent = new Audio(audioFileParse('bgmCooking.mp3'));
+function setAudio(inputString) {
+    audioCurrent.pause();
+    audioCurrent.currentTime = 0;
+    audioCurrent = new Audio(audioFileParse(inputString));
+    audioCurrent.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+    }, false);
+    audioCurrent.play();
+}
 
 
 //Initial reset
@@ -693,6 +709,8 @@ function resetFunction() {
         var newTrivia = triviaList[currentTrivia];
         changeStyleValues(newTrivia);
 
+        setAudio(styleValues.audio);
+
         $('#iconValue').attr('href', iconFileParse(styleValues.icon));
         $('body').css('background-image', imageFileParse(styleValues.background));
         $('#timer, #holderQA').css('background', rgbaConvert(styleValues));
@@ -741,6 +759,17 @@ function selectFunction() {
 //Changes styleValues depending on current input
 function changeStyleValues(inputString) {
     switch (inputString) {
+        case 'Cooking':
+            styleValues.r = 255;
+            styleValues.g = 255;
+            styleValues.b = 255;
+            styleValues.a = 0.5;
+            styleValues.icon = 'pot.png'
+                styleValues.title = 'Cooking Trivia';
+            styleValues.background = 'backgroundKitchen.jpg';
+            styleValues.cursor = 'kitchenUtensils.png';
+            styleValues.audio = 'bgmCooking.mp3';
+            break;
         case 'MonsterHunter':
             styleValues.r = 175;
             styleValues.g = 225;
@@ -750,6 +779,7 @@ function changeStyleValues(inputString) {
                 styleValues.title = 'Monster Hunter Trivia';
             styleValues.background = 'backgroundMonsterHunter.jpg';
             styleValues.cursor = 'hbg.png';
+            styleValues.audio = 'bgmMH.mp3';
             break;
         case 'Bloodborne':
             styleValues.r = 120;
@@ -760,16 +790,7 @@ function changeStyleValues(inputString) {
                 styleValues.title = 'Bloodborne Trivia';
             styleValues.background = 'backgroundBloodborne.jpg';
             styleValues.cursor = 'sawCleaver.png';
-            break;
-        case 'Cooking':
-            styleValues.r = 255;
-            styleValues.g = 255;
-            styleValues.b = 255;
-            styleValues.a = 0.5;
-            styleValues.icon = 'pot.png'
-                styleValues.title = 'Cooking Trivia';
-            styleValues.background = 'backgroundKitchen.jpg';
-            styleValues.cursor = 'kitchenUtensils.png';
+            styleValues.audio = 'bgmBB.mp3';
             break;
         default:
             break;
@@ -793,6 +814,13 @@ function cursorFileParse(inputFile) {
 //Parses icon file location
 function iconFileParse(inputFile) {
     var returnValue = 'assets/images/';
+    returnValue += inputFile;
+    return returnValue;
+}
+
+//Parses audio file location
+function audioFileParse(inputFile) {
+    var returnValue = 'assets/audio/';
     returnValue += inputFile;
     return returnValue;
 }
@@ -898,14 +926,17 @@ function handleAnswer(inputResult, inputAnswer, inputAnswered) {
     var yourDisplay = $('<h3>');
     var correctDisplay = $('<h3>');
     if (inputResult) {
+        audioCorrect.play();
         answerDisplay.text('Correct!');
         scoreHolder.append(answerDisplay);
     } else {
         if (!inputAnswered) {
             answerDisplay.text('Times Up!');
+            audioTimesUp.play();
         } else {
             answerDisplay.text('Incorrect');
             yourDisplay.text('Your Answer: '+ inputAnswer);
+            audioIncorrect.play();
         }
         correctDisplay.text('Correct Answer: ' + currentCorrect);
         scoreHolder.append(answerDisplay);
