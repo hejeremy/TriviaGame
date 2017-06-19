@@ -262,7 +262,7 @@ var questionsBB = {
         incorrect: ['Estus Flask', 'Health Potion', 'Food'],
     },
     question21: {
-        question: 'What is the most common resource consumed when making ranged attacks in Bloodborne?',
+        question: 'What is the most common resource consumed when performing ranged attacks in Bloodborne?',
         correct: 'Quicksilver Bullets',
         incorrect: ['Mana', 'Arcane Haze', 'Blood Echos', 'Insight'],
     },
