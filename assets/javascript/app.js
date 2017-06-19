@@ -843,6 +843,7 @@ function scrambleArray(inputArray) {
 function emptyTrivia() {
     questionHolder.empty();
     answerHolder.empty();
+    scoreHolder.empty();
 }
 
 //Continues the trivia
@@ -898,7 +899,7 @@ function handleAnswer(inputResult, inputAnswer, inputAnswered) {
     var correctDisplay = $('<h3>');
     if (inputResult) {
         answerDisplay.text('Correct!');
-        answerHolder.append(answerDisplay);
+        scoreHolder.append(answerDisplay);
     } else {
         if (!inputAnswered) {
             answerDisplay.text('Times Up!');
@@ -907,9 +908,9 @@ function handleAnswer(inputResult, inputAnswer, inputAnswered) {
             yourDisplay.text('Your Answer: '+ inputAnswer);
         }
         correctDisplay.text('Correct Answer: ' + currentCorrect);
-        answerHolder.append(answerDisplay);
-        answerHolder.append(yourDisplay);
-        answerHolder.append(correctDisplay);
+        scoreHolder.append(answerDisplay);
+        scoreHolder.append(yourDisplay);
+        scoreHolder.append(correctDisplay);
     }
     continueCounting();
 }
