@@ -7,7 +7,7 @@
  */
 
 //Holds all trivia questions
-var questionsMH = {
+const questionsMH = {
     question1: {
         question: 'What Lynian species of cats try to hit you and steal your items?',
         correct: 'Melynx',
@@ -160,7 +160,7 @@ var questionsMH = {
     },
 }
 
-var questionsBB = {
+const questionsBB = {
     question1: {
         question: 'Who is the first boss you must fight to continue the story?',
         correct: 'Father Gascoigne',
@@ -328,7 +328,7 @@ var questionsBB = {
     },
 }
 
-var questionsCooking = {
+const questionsCooking = {
     question1: {
         question: 'When boiling water, what does adding salt do?',
         correct: 'Makes the water boil at a higher temperature',
@@ -472,7 +472,7 @@ var questionsCooking = {
 }
 
 //Initialize CSS, image, audio values
-var styleValues = {
+let styleValues = {
     r: 255,
     g: 255,
     b: 255,
@@ -486,24 +486,24 @@ var styleValues = {
 
 //Interval values
 
-var secondCounter;
-var resetTime = 20;
-var seconds = resetTime;
+let secondCounter;
+let resetTime = 20;
+let seconds = resetTime;
 
 //Trivia list
-var currentTrivia = 0;
-var triviaList = [];
+let currentTrivia = 0;
+let triviaList = [];
 triviaList.push('Cooking');
 triviaList.push('MonsterHunter');
 triviaList.push('Bloodborne');
 
 //Question values
-var triviaQuestions = loadTrivia(triviaList[currentTrivia]);
-var objectLength = 0;
-var triviaKeys = loadKeys(triviaQuestions);
-var score = 0;
-var numberIncorrect = 0;
-var currentResponse = false;
+let triviaQuestions = loadTrivia(triviaList[currentTrivia]);
+let objectLength = 0;
+let triviaKeys = loadKeys(triviaQuestions);
+let score = 0;
+let numberIncorrect = 0;
+let currentResponse = false;
 
 function loadTrivia(inputString) {
     switch(inputString) {
@@ -522,11 +522,11 @@ function loadTrivia(inputString) {
 }
 
 //Question tracking variables
-var currentQuestion = 0;
-var totalQuestionsUsed = Math.min(triviaQuestions.length, 10);
+let currentQuestion = 0;
+let totalQuestionsUsed = Math.min(triviaQuestions.length, 10);
 
 //Interval functions
-var intervalHolder = {
+let intervalHolder = {
     stopSecondCounter: function() {
         clearInterval(secondCounter);
     },
@@ -548,8 +548,8 @@ var intervalHolder = {
     },
 
     timeConverter(inputValue) {
-        var minuteString = Math.floor(seconds/60).toString();
-        var secondString = (seconds % 60).toString();
+        let minuteString = Math.floor(seconds/60).toString();
+        let secondString = (seconds % 60).toString();
 
         if (secondString.length < 2) {
             secondString = '0'+ secondString;
@@ -569,31 +569,31 @@ var intervalHolder = {
 }
 
 //Initial setups
-var triviaEnded = true;
-var showAnswer = false;
-var currentAnswer = 'N/A';
-var currentCorrect = 'N/A';
-var answered = false;
-var timer = $('#timer');
-var questionHolder = $('#questionHolder');
-var answerHolder = $('#answerHolder');
-var scoreHolder = $('#scoreHolder');
-var holderQA = $('#holderQA');
+let triviaEnded = true;
+let showAnswer = false;
+let currentAnswer = 'N/A';
+let currentCorrect = 'N/A';
+let answered = false;
+const timer = $('#timer');
+const questionHolder = $('#questionHolder');
+const answerHolder = $('#answerHolder');
+const scoreHolder = $('#scoreHolder');
+const holderQA = $('#holderQA');
 
 //Permanent buttons
-var startButton;
-var nextButton;
-var resetButton;
+let startButton;
+let nextButton;
+let resetButton;
 //var toggleButton;
-var selectList;
+let selectList;
 setPermanentButtons();
 setPermanentEvents();
 
 //Audio
-var audioCorrect = new Audio(audioFileParse('correct.wav'));
-var audioIncorrect = new Audio(audioFileParse('incorrect.wav'));
-var audioTimesUp = new Audio(audioFileParse('timesUp.wav'));
-var audioCurrent = new Audio(audioFileParse(styleValues.audio));
+let audioCorrect = new Audio(audioFileParse('correct.wav'));
+let audioIncorrect = new Audio(audioFileParse('incorrect.wav'));
+let audioTimesUp = new Audio(audioFileParse('timesUp.wav'));
+let audioCurrent = new Audio(audioFileParse(styleValues.audio));
 
 //Sets main audio
 function setAudio(inputString) {
@@ -644,8 +644,8 @@ function setPermanentButtons() {
     selectList = $('<select>');
     selectList.attr('id', 'selectList');
     selectList.addClass('form-control');
-    for (var i=0; i<triviaList.length; i++) {
-        var option = $('<option>');
+    for (let i=0; i<triviaList.length; i++) {
+        const option = $('<option>');
         option.addClass('triviaOption');
         option.data('triviaValue', i);
         option.text(triviaList[i]);
@@ -708,7 +708,7 @@ function nextFunction() {
 //Resets so you can play again!
 function resetFunction() {
     if(triviaEnded) {
-        var newTrivia = triviaList[currentTrivia];
+        let newTrivia = triviaList[currentTrivia];
         changeStyleValues(newTrivia);
 
         setAudio(styleValues.audio);
@@ -749,7 +749,7 @@ function resetFunction() {
 //Allows you to select which trivia
 function selectFunction() {
     if (triviaEnded) {
-        var optionElement = $(this).find('option:selected');
+        const optionElement = $(this).find('option:selected');
         currentTrivia = optionElement.data('triviaValue');
         //console.log(currentTrivia);
         resetFunction();
@@ -801,35 +801,35 @@ function changeStyleValues(inputString) {
 
 //Parses image file location
 function imageFileParse(inputFile) {
-    var returnValue = "url(assets/images/";
+    let returnValue = "url(assets/images/";
     returnValue += inputFile + ")";
     return returnValue;
 }
 
 //Parses cursor file location
 function cursorFileParse(inputFile) {
-    var returnValue = "url(assets/images/";
+    let returnValue = "url(assets/images/";
     returnValue += inputFile + "), auto";
     return returnValue;
 }
 
 //Parses icon file location
 function iconFileParse(inputFile) {
-    var returnValue = 'assets/images/';
+    let returnValue = 'assets/images/';
     returnValue += inputFile;
     return returnValue;
 }
 
 //Parses audio file location
 function audioFileParse(inputFile) {
-    var returnValue = 'assets/audio/';
+    let returnValue = 'assets/audio/';
     returnValue += inputFile;
     return returnValue;
 }
 
 //Returns rgba value for background css
 function rgbaConvert(inputObject) {
-    var returnValue = 'rgba\(' ;
+    let returnValue = 'rgba\(' ;
     returnValue += inputObject.r + ',';
     returnValue += inputObject.g + ',';
     returnValue += inputObject.b + ',';
@@ -840,7 +840,7 @@ function rgbaConvert(inputObject) {
 
 //Returns length of object
 function findObjectLength(inputObject) {
-    var objectLength = 0;
+    let objectLength = 0;
     for(x in inputObject) {
         objectLength++;
     }
@@ -849,7 +849,7 @@ function findObjectLength(inputObject) {
 
 //Returns keys of object
 function loadKeys(inputObject) {
-    var questionArray = [];
+    let questionArray = [];
     for (x in inputObject) {
         questionArray.push(x);
         objectLength++;
@@ -859,8 +859,8 @@ function loadKeys(inputObject) {
 
 //Scrambles the answer list
 function scrambleArray(inputArray) {
-    var i, j, x;
-    var arrayLength = inputArray.length;
+    let i, j, x;
+    const arrayLength = inputArray.length;
     for (i = 0; i < inputArray.length; i++) {
         j = Math.floor(Math.random()*(arrayLength));
         x = inputArray[i];
@@ -883,22 +883,22 @@ function continueTrivia() {
     currentCorrect = 'N/A';
     resetTime = 20;
 
-    var questionObject = triviaQuestions[triviaKeys[currentQuestion]];
+    let questionObject = triviaQuestions[triviaKeys[currentQuestion]];
     questionHolder.html('<h3>' + questionObject['question'] + '</h3>');
 
-    var responses = questionObject['incorrect'].slice(0);
-    var correctElement = questionObject['correct'];
+    let responses = questionObject['incorrect'].slice(0);
+    let correctElement = questionObject['correct'];
     currentCorrect = correctElement;
     responses.push(correctElement);
 
     scrambleArray(responses);
 
-    var answers = $('<form>');
+    const answers = $('<form>');
     answerHolder.append(answers);
 
-    for (var i = 0; i < responses.length; i++) {
-        var responseLabel = $('<label>');
-        var response = $('<input>');
+    for (let i = 0; i < responses.length; i++) {
+        const responseLabel = $('<label>');
+        const response = $('<input>');
         response.addClass('inputChoice');
         response.attr('type', 'radio');
         response.attr('name', 'answer');
@@ -924,9 +924,9 @@ function continueTrivia() {
 function handleAnswer(inputResult, inputAnswer, inputAnswered) {
     resetTime = 5;
     emptyTrivia();
-    var answerDisplay = $('<h3>');
-    var yourDisplay = $('<h3>');
-    var correctDisplay = $('<h3>');
+    const answerDisplay = $('<h3>');
+    const yourDisplay = $('<h3>');
+    const correctDisplay = $('<h3>');
     if (inputResult) {
         audioCorrect.play();
         answerDisplay.text('Correct!');
@@ -1013,9 +1013,9 @@ function endTrivia() {
 }
 
 function scoreResponse(inputValue) {
-    var message = $('<h2>');
-    var threshold1 = totalQuestionsUsed / 2;
-    var threshold2 = totalQuestionsUsed / 4 * 3;
+    const message = $('<h2>');
+    const threshold1 = totalQuestionsUsed / 2;
+    const threshold2 = totalQuestionsUsed / 4 * 3;
     if (inputValue <= threshold1) {
         message.text('Better luck next time!');
     } else if (inputValue > threshold1 && inputValue <= threshold2) {
